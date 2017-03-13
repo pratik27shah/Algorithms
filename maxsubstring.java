@@ -16,11 +16,10 @@ public class maxsubstring {
 
 	public static void main(String[] args) {
 		HashMap<String, Integer> hashvalues = new HashMap<String, Integer>();
-		HashMap<String, Integer> Quehashvalues = new HashMap<String, Integer>();
-		Queue<String> que = new LinkedList<String>();
 		int k = 2;
-		String str = "abaabed";
-		String newstr = "";
+		String newstr="",tempstr="";
+		String str = "aabaaccee";
+	
 		for (int i = 0; i < str.length(); i++) {
 			if (hashvalues.containsKey(str.substring(i,i+1))) {
 				hashvalues.put(str.substring(i,i+1), hashvalues.get(str.substring(i,i+1)) + 1);
@@ -31,35 +30,25 @@ public class maxsubstring {
 				hashvalues.put(str.substring(i,i+1), 1);
 
 		}
-
-		for (int i = 0; i < str.length(); i++) {
-			if (Quehashvalues.containsKey(str.substring(i,i+1))) {
-				Quehashvalues.put(str.substring(i,i+1), Quehashvalues.get(str.substring(i,i+1)) + 1);
-
-			} else
-			{
-				Quehashvalues.put(str.substring(i,i+1), 1);
-	
-			}
-			if (hashvalues.get(str.substring(i,i+1)) >= k) {
-			//	newstr = newstr + str.substring(i,i+1);
-
+		
+		for(int i=0;i<str.length();i++)
+		{
 			
-				que.add(str.substring(i,i+1));
-			} else {
-				if(!que.isEmpty()){
+			if(hashvalues.get(str.substring(i,i+1))<k)
+			{
 				
-				newstr=que.peek();
-				if(Quehashvalues.get(newstr)<k)
-				{
-					que.poll();
-					
-				}
-				}
+				if(newstr.length()<tempstr.length())
+					newstr=tempstr;
+				tempstr="";
+			}
+			
+			else
+			{
+				
+				tempstr=tempstr+str.substring(i,i+1);
 			}
 		}
-		System.out.println(que);
-
-	}
-
-}
+		if(newstr.length()<tempstr.length())
+			newstr=tempstr;
+	System.out.println(newstr);
+	}}
